@@ -8,13 +8,11 @@ void push(GEN** gen, int number){
 	*gen = newGen;
 }
 
-
-
 void printGen(GEN* gen, FILE *output){
 	//while (gen != NULL) {
-			fprintf(output, "%d", gen->number);
-			print_coords(gen->pos, output);
-			//gen = gen->next;
-			fprintf(output, "\n");
+		fprintf(output, "%d", gen->number);
+		print_coords(gen->pos, output);
+		//gen = gen->next;
+		fprintf(output, "\n");
 	//}
 }

@@ -8,14 +8,15 @@ void addCoordsAtEnd(COORDS** head, int x, int y) {
 	newCoords->next = NULL;
 
 	if (*head == NULL) {
-			*head = newCoords;
+		*head = newCoords;
 	} else {
-			COORDS *aux = *head;
-			while (aux->next) {
-					aux = aux->next;
-			}
-			aux->next = newCoords;
+		COORDS *aux = *head;
+		while (aux->next) {
+			aux = aux->next;
+		}
+		aux->next = newCoords;
 	}
+
 }
 
 void print_coords(COORDS *pos, FILE *output) {
@@ -24,3 +25,4 @@ void print_coords(COORDS *pos, FILE *output) {
 		pos = pos->next;
 	}
 }
+

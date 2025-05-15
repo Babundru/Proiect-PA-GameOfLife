@@ -85,9 +85,9 @@ void update_matrix(char *aux_matrix, int lines, int columns, char *updated_matri
 			int alive = check_if_will_be_alive(aux_matrix, i, j, lines, columns);
 
 			if (alive) {
-					updated_matrix[i * columns + j] = 'X';
+				updated_matrix[i * columns + j] = 'X';
 			} else {
-					updated_matrix[i * columns + j] = '+';
+				updated_matrix[i * columns + j] = '+';
 			}
 
 			if(updated_matrix[i * columns + j] != aux_matrix[i * columns + j]) {
@@ -120,9 +120,7 @@ void output_updated_matrix(int lines, int columns, int generations, FILE *output
 		
 		push(gen, k+1);
 
-		update_matrix(aux_matrix, lines, columns, updated_matrix, *gen);
-
-		
+		update_matrix(aux_matrix, lines, columns, updated_matrix, *gen);		
 
 		copy_matrix(updated_matrix, lines, columns, aux_matrix);
 
