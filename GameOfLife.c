@@ -41,21 +41,22 @@ int main(int argc, const char *argv[]) {
 	}
 
 
-	TREE *root = malloc(sizeof(TREE));
-	root->left = NULL;
-	root->right = NULL;
-	root->positions = NULL;
+	
 
-	if (testnr == 3) {
+	if (testnr == 3 || testnr == 4){
+		TREE *root = malloc(sizeof(TREE));
+		root->left = NULL;
+		root->right = NULL;
+		root->positions = NULL;
 
 		root = set_root_coords(matrix, lines, columns, generations, root, output);
 		create_tree(root, lines, columns, generations, matrix, -1, output);
-		preorder(root, output, matrix, lines, columns, 1);
+
+		preorder(root, output, matrix, lines, columns, 1, testnr);
 
 		free_tree(root);
 	}
-
-	free(root);
+	
 	fclose(input);
 	fclose(output);
 	free(matrix);

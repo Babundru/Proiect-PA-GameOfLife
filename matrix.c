@@ -1,4 +1,4 @@
-#include "matrix.h"
+#include "T2bonus.h"
 
 void copy_matrix(char const *matrix, int lines, int columns, char *pasted_matrix){
 	for(int i=0; i < lines; i++){
@@ -133,6 +133,15 @@ void output_updated_matrix(int lines, int columns, int generations, FILE *output
 		}
 
 	}
+
+	
+	///////////////// BONUS TASK 2 //////////////////////
+
+	// if(testnr == 2){
+	// 	reverse(*gen, updated_matrix, generations, output, lines, columns);
+	// }
+
+	////////////////////////////////////////////////////
 
 	free(updated_matrix);
 }

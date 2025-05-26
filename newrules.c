@@ -1,4 +1,4 @@
-#include "newrules.h"
+#include "graph.h"
 
 int check_if_will_be_alive_new_rules(char const *matrix, int i, int j, int lines, int columns){
 
@@ -58,7 +58,7 @@ TREE* set_root_coords(char const *matrix, int lines, int columns, int generation
 }
 
 
-char* create_initial_matrix(FILE *output, int lines, int columns, COORDS *pos){
+char* create_initial_matrix(FILE *output, int lines, int columns, COORDS *pos, int testnr){
 
 	char *matrix = malloc(sizeof(char)*lines*columns);
 
@@ -75,12 +75,15 @@ char* create_initial_matrix(FILE *output, int lines, int columns, COORDS *pos){
 		}
 	}
 
-	output_matrix(matrix, lines, columns, output);
+	if(testnr == 3){
+		output_matrix(matrix, lines, columns, output);
+	}
+
 
 	return matrix;
 }
 
-char* create_and_print_matrix(FILE *output, int lines, int columns, COORDS *pos, char const *prev_matrix) {
+char* create_and_print_matrix(FILE *output, int lines, int columns, COORDS *pos, char const *prev_matrix, int testnr) {
 
 	char *matrix = malloc(sizeof(char) * lines * columns);
 	memcpy(matrix, prev_matrix, lines * columns * sizeof(char));
@@ -101,25 +104,33 @@ char* create_and_print_matrix(FILE *output, int lines, int columns, COORDS *pos,
 	}
 
 	// Output the matrix
-	output_matrix(matrix, lines, columns, output);
+	if(testnr == 3){
+		output_matrix(matrix, lines, columns, output);
+	}
+	
 
 	return matrix;
 }
 
 
-void preorder(TREE* root, FILE *output, char const *prev_matrix, int lines, int columns, int first_matrix) {
+void preorder(TREE* root, FILE *output, char const *prev_matrix, int lines, int columns, int first_matrix, int testnr){
 	if(root){
 		char *current_matrix = NULL;
 		
 		if(first_matrix == 1) {
 			//Creates and outputs the initial matrix, for the first call of the function
-			current_matrix = create_initial_matrix(output, lines, columns, root->positions);
+			current_matrix = create_initial_matrix(output, lines, columns, root->positions, testnr);
 		} else {
-			current_matrix = create_and_print_matrix(output, lines, columns, root->positions, prev_matrix);
+			current_matrix = create_and_print_matrix(output, lines, columns, root->positions, prev_matrix, testnr);
 		}
 
-		preorder(root->left, output, current_matrix, lines, columns, 0);
-		preorder(root->right, output, current_matrix, lines, columns, 0);
+		if(testnr == 4){
+			//printf("Generation");
+			make_graph(current_matrix, lines, columns, output);
+		}		
+
+		preorder(root->left, output, current_matrix, lines, columns, 0, testnr);
+		preorder(root->right, output, current_matrix, lines, columns, 0, testnr);
 
 		free(current_matrix);
 	}
